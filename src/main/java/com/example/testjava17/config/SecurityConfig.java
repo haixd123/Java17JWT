@@ -1,29 +1,45 @@
 package com.example.testjava17.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import com.example.testjava17.service.impl.CustomUserDetailsServiceImpl;
+import org.springframework.security.authentication.*;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
-    @Autowired
-    private JwtFilter jwtFilter;
+
+    private final JwtFilter jwtAuthenticationFilter;
+//    private final CustomUserDetailsServiceImpl customUserDetailsService;
+
+    public SecurityConfig(JwtFilter jwtAuthenticationFilter, CustomUserDetailsServiceImpl customUserDetailsService) {
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+//        this.customUserDetailsService = customUserDetailsService;
+    }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-                .securityMatcher("/**") // Áp dụng cho toàn bộ request
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .csrf(AbstractHttpConfigurer::disable)
-//                .csrf(csrf -> csrf.disable())
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration)
+            throws Exception {
+        return configuration.getAuthenticationManager();
+    }
 }
+

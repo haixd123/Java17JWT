@@ -17,25 +17,20 @@ public class CustomUserDetails implements UserDetails {
         this.user = user;
     }
 
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return user.getRoles().stream()
-//                .flatMap(role -> Stream.concat(
-//                        Stream.of(new SimpleGrantedAuthority(role.getName())), // quyền theo Role
-//                        role.getPermissions().stream()
-//                                .map(p -> new SimpleGrantedAuthority(p.getName())) // quyền theo Permission
-//                ))
-//                .collect(Collectors.toSet());
-//    }
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return user.getRoles().stream()
+                .flatMap(role -> Stream.concat(
+                        Stream.of(new SimpleGrantedAuthority(role.getName())), // quyền theo Role
+                        role.getPermissions().stream()
+                                .map(p -> new SimpleGrantedAuthority(p.getName())) // quyền theo Permission
+                ))
+                .collect(Collectors.toSet());
+    }
 
     @Override
     public String getUsername() {
         return user.getUserName();
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
     }
 
     @Override

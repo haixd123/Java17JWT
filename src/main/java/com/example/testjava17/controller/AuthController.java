@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -31,6 +32,7 @@ public class AuthController {
     private UsersRepository usersRepository;
 
     @PostMapping("/login")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public BaseResponse login(@RequestBody @Valid AuthRequest request, HttpServletResponse response) {
         UsersEntity user = usersRepository.findByUserName(request.getUserName());
 
