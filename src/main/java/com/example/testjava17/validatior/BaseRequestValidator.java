@@ -29,8 +29,8 @@ public class BaseRequestValidator implements ConstraintValidator<ValidBaseReques
         }
         // validate secureCode
         UsersEntity users = usersRepository.findByUserName(baseRequest.getUserName());
-        var privateKey = users.getPrivateKey() != null ? users.getPrivateKey() : "";
-        var combineData = Stream.concat(baseRequest.combineField(), Stream.of(privateKey))
+        var seasionId = users.getSessionId() != null ? users.getSessionId() : "";
+        var combineData = Stream.concat(baseRequest.combineField(), Stream.of(seasionId))
                 .map(String::valueOf)
                 .collect(Collectors.joining("|"));
         log.info("combineData = " + combineData);

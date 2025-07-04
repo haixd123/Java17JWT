@@ -20,8 +20,6 @@ public class UsersEntity {
     private String userName;
     @Column(name = "PASSWORD")
     private String password;
-    @Column(name = "PRIVATE_KEY")
-    private String privateKey;
     @Column(name = "SESSION_ID")
     private String sessionId;
 
