@@ -8,8 +8,11 @@ import lombok.Getter;
 public enum ErrorCode {
     SUCCESS("00", "Success"),
     INVALID_INPUT("01", "Invalid Input"),
-    PARTNER_NOT_FOUND("02", "Partner not found"),
-    INVALID_SIGNATURE("03", "Invalid Signature"),
+    WRONG_INPUT("02", "Wrong user/password"),
+    PARTNER_NOT_FOUND("03", "Partner not found"),
+    INVALID_SIGNATURE("04", "Invalid Signature"),
+    INVALID_SESSION("401", "Invalid session"),
+    INVALID_REFRESH_TOKEN("402", "Invalid refresh token"),
     UNKNOWN_ERROR("99", "Unknown Exception"),
     CUSTOM_ERROR("-99", ""),
     ;

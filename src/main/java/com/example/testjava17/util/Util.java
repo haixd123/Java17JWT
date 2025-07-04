@@ -12,22 +12,6 @@ public class Util {
     public static final Pattern yyyyMMddHHmmss = Pattern.compile("^\\d{4}\\d{2}\\d{2}\\d{2}\\d{2}\\d{2}$");
     public static final String yyyyMMddHHmmssFormat = "yyyyMMddHHmmss";
 
-    public static String generateSignature(long userId, Stream<Object> args) {
-        //TODO Lấy userId để getPrivateKey
-//        var sdkPartnerAccountService = SpringContext.getBean(SdkPartnerAccountService.class);
-//        var sdkPartnerAccount = sdkPartnerAccountService.getSdkPartnerAccount(userId);
-//        if (sdkPartnerAccount.isEmpty()) {
-//            throw new BusinessException(ErrorCode.PARTNER_NOT_FOUND);
-//        }
-//        var privateKey = sdkPartnerAccount.get().getPrivateKey();
-//        var combineData = Stream.concat(args, Stream.of(privateKey))
-//                .map(String::valueOf)
-//                .collect(Collectors.joining(Constant.SEPARATE_FIELD));
-//        log.info("combineData = " + combineData);
-//        return Util.sha256(combineData);
-        return null;
-    }
-
     public static String sha256(String message) {
         String digest;
         try {

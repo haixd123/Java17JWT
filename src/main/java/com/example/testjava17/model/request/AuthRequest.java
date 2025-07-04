@@ -1,13 +1,13 @@
 package com.example.testjava17.model.request;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.util.StringUtils;
 
 import java.util.stream.Stream;
 
-//@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 public class AuthRequest extends BaseRequest {
     private String password;
 
