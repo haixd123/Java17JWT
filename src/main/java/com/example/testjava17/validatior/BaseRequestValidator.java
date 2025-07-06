@@ -10,6 +10,7 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -18,6 +19,9 @@ import java.util.stream.Stream;
 public class BaseRequestValidator implements ConstraintValidator<ValidBaseRequest, BaseRequest> {
     @Autowired
     private UsersRepository usersRepository;
+
+    @Value("Jv17.privateKey")
+    private String privateKey;
 
     @Override
     public boolean isValid(BaseRequest baseRequest, ConstraintValidatorContext context) {
@@ -33,6 +37,7 @@ public class BaseRequestValidator implements ConstraintValidator<ValidBaseReques
         var combineData = Stream.concat(baseRequest.combineField(), Stream.of(seasionId))
                 .map(String::valueOf)
                 .collect(Collectors.joining("|"));
+        combineData = combineData + "|" + privateKey;
         log.info("combineData = " + combineData);
         String signature = Util.sha256(combineData);
         if (!baseRequest.getSecureCode().equals(signature)) {

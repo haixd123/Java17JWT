@@ -66,7 +66,9 @@ public class AuthController {
             if (user == null || user.getSessionId() == null || !jwtUtil.isTokenValid(refreshToken, user.getSessionId())) {
                 return BaseResponse.error(ErrorCode.INVALID_SESSION);
             }
-
+            String sessionId = UUID.randomUUID().toString();
+            user.setSessionId(sessionId);
+            usersRepository.save(user);
             String newAccessToken = jwtUtil.generateAccessToken(user);
             return BaseResponse.success(ErrorCode.SUCCESS, newAccessToken);
         } catch (JwtException e) {

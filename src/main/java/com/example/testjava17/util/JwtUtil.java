@@ -42,7 +42,7 @@ public class JwtUtil {
     public String generateAccessToken(UsersEntity user) {
         return Jwts.builder()
                 .setSubject(user.getUserName())
-                .claim("sessionId", user.getSessionId())
+//                .claim("sessionId", user.getSessionId())
                 .setIssuedAt(new Date())
 //                .setExpiration(new Date(System.currentTimeMillis() + 15 * 60 * 1000)) // 15 phút
                 .setExpiration(new Date(System.currentTimeMillis() + 10 * 1000))
@@ -53,7 +53,7 @@ public class JwtUtil {
     public String generateRefreshToken(UsersEntity user) {
         return Jwts.builder()
                 .setSubject(user.getUserName())
-                .claim("sessionId", user.getSessionId())
+//                .claim("sessionId", user.getSessionId())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 30L * 24 * 60 * 60 * 1000)) // 30 ngày
                 .signWith(key)
