@@ -21,7 +21,7 @@ public class RoleEntity {
     private String description;
     // Quan hệ với UsersEntity (người dùng)
     @ManyToMany(mappedBy = "roles")
-    private Set<UsersEntity> users = new HashSet<>();
+    private Set<UserEntity> users = new HashSet<>();
 
     // Quan hệ với Permission
     @ManyToMany(fetch = FetchType.EAGER)

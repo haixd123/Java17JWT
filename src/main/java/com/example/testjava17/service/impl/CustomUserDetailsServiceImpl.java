@@ -1,7 +1,7 @@
 package com.example.testjava17.service.impl;
 
 import com.example.testjava17.config.CustomUserDetails;
-import com.example.testjava17.model.entity.fyna.UsersEntity;
+import com.example.testjava17.model.entity.fyna.UserEntity;
 import com.example.testjava17.repository.fyna.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +17,7 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UsersEntity user = usersRepository.findByUserName(username);
+        UserEntity user = usersRepository.findByUserName(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }

@@ -9,15 +9,17 @@ import java.util.stream.Stream;
 @Getter
 @Setter
 public class AuthRequest extends BaseRequest {
+//    public class AuthRequest {
+    private String userName;
     private String password;
 
     @Override
     public boolean validInput() {
-        return StringUtils.hasText(password);
+        return false;
     }
 
     @Override
     public Stream<Object> combineField() {
-        return Stream.of(getRequestId(), getRequestDate(), getUserName(), password);
+        return Stream.empty();
     }
 }

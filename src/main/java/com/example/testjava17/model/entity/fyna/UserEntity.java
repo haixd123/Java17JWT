@@ -9,8 +9,9 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "USERS")
-public class UsersEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserEntity {
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_USERS")
+    @SequenceGenerator(sequenceName = "SEQ_USERS", allocationSize = 1, name = "SEQ_USERS")
 
     @Id
     private Long id;
@@ -20,8 +21,6 @@ public class UsersEntity {
     private String userName;
     @Column(name = "PASSWORD")
     private String password;
-    @Column(name = "SESSION_ID")
-    private String sessionId;
 
     @ManyToMany(fetch = FetchType.EAGER) // EAGER luôn load role khi load user
     @JoinTable(

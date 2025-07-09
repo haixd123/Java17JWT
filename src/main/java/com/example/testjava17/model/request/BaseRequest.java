@@ -16,6 +16,7 @@ public abstract class BaseRequest {
     private String requestDate;
     private String userName;
     private String secureCode;
+    private String authToken;
 
     public abstract boolean validInput();
 
@@ -25,6 +26,7 @@ public abstract class BaseRequest {
         return StringUtils.hasLength(requestId)
                 && StringUtils.hasLength(requestDate) && Util.yyyyMMddHHmmss.matcher(requestDate).matches()
                 && StringUtils.hasLength(userName)
-                && StringUtils.hasLength(secureCode);
+                && StringUtils.hasLength(secureCode)
+                && StringUtils.hasLength(authToken);
     }
 }

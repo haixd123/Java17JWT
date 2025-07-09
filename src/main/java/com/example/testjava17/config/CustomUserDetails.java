@@ -1,19 +1,18 @@
 package com.example.testjava17.config;
 
-import com.example.testjava17.model.entity.fyna.UsersEntity;
+import com.example.testjava17.model.entity.fyna.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CustomUserDetails implements UserDetails {
-    private final UsersEntity user;
+    private final UserEntity user;
 
-    public CustomUserDetails(UsersEntity user) {
+    public CustomUserDetails(UserEntity user) {
         this.user = user;
     }
 
