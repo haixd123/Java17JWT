@@ -22,11 +22,11 @@ public class UserEntity {
     @Column(name = "PASSWORD")
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER) // EAGER luôn load role khi load user
-    @JoinTable(
-            name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<RoleEntity> roles = new HashSet<>();
+//    @ManyToMany(fetch = FetchType.EAGER) // EAGER luôn load role khi load user
+//    @JoinTable(
+//            name = "user_role",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "role_id")
+//    )
+//    private Set<RoleEntity> roles = new HashSet<>();
 }
